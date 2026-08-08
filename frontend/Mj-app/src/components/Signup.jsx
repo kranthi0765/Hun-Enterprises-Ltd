@@ -6,10 +6,32 @@ function Signup() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Signup:", { username, email, password });
-        // Later: send to backend API
+        try {
+            const response = await fetch("http://localhost:8080/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, email, password }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log("Signup successful:", data);
+                // Handle successful signup (e.g., redirect to login page)
+                setUsername("");
+                setEmail("");
+                setPassword("");
+            } else {
+                console.error("Signup failed:" + data);
+                // Handle signup failure (e.g., show error message)
+            }
+        } catch (error) {
+            console.error("Error during signup:", error);
+            // Handle network or other errors
+            alert("An error occurred during signup. Please try again later.");
+        }
     };
 
     return (
