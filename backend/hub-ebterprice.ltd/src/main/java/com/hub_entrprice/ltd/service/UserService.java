@@ -30,7 +30,7 @@ public class UserService {
     public ResponseEntity<User> loginUser(UserDto uuser) {
         User existingUser = null;
         try {
-            existingUser = userRepository.findByUsername(uuser.getUsername());
+            existingUser = userRepository.findByEmail(uuser.getEmail());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +39,7 @@ public class UserService {
             System.out.println("Login successful for user: " + existingUser);
         } else {
             // Invalid credentials
-            System.out.println("Invalid username or password");
+            System.out.println("Invalid email or password");
         }
         return ResponseEntity.ok(existingUser) ;
     }

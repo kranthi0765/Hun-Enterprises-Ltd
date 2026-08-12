@@ -121,6 +121,9 @@ function Signup() {
                             placeholder="Confirm your password"
                             autoComplete="new-password"
                         />
+                        {
+                            message && <div className={`form-message ${messageType}`}>{message}</div>
+                        }
                         <button type="submit" className="btn" disabled={loading}>
                             {loading ? "Creating account..." : "Create Account"}
                         </button>
@@ -136,7 +139,7 @@ function Signup() {
                     </div>
 
                     <p className="auth-switch">
-                        Already have an account? <Link to="/login">Sign in</Link>
+                        Already have an account? <Link to="http://localhost:8080/auth/login">Sign in</Link>
                     </p>
                 </div>
             </div>
