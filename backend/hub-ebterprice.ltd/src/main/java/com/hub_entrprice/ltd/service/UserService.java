@@ -4,6 +4,8 @@ import com.hub_entrprice.ltd.dto.UserDto;
 import com.hub_entrprice.ltd.entity.User;
 import com.hub_entrprice.ltd.repository.UserRepository;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -16,14 +18,17 @@ public class UserService {
     @Autowired
     public UserRepository userRepository;
 
-    public String createUser(User user) {
+    public String createUser(UserDto user) {
         User newUser = new User();
-        newUser.setUsername(user.getUsername());
+        newUser.setFirstName(user.getFirstName());
+        newUser.setLastName(user.getLastName());
+        newUser.setPhoneNumber(user.getPhoneNumber());
         newUser.setPassword(user.getPassword());
         newUser.setEmail(user.getEmail());
         userRepository.save(newUser);
         return "User created successfully"+
-                "Username: " + newUser.getUsername() +
+                "First Name: " + newUser.getFirstName() +
+                ", Last Name: " + newUser.getLastName() +
                 ", Email: " + newUser.getEmail();
     }
 

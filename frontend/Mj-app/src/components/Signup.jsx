@@ -3,7 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import FormInput from "./FormInput";
 
 function Signup() {
-    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -33,7 +35,9 @@ function Signup() {
             if (response.ok) {
                 setMessageType("success");
                 setMessage(data);
-                setUsername("");
+                setFirstName("");
+                setLastName("");
+                setPhoneNumber("");
                 setEmail("");
                 setPassword("");
                 setConfirmPassword("");
@@ -85,15 +89,7 @@ function Signup() {
                     <p className="auth-subtitle">Create your free account to get started</p>
 
                     <form onSubmit={handleSubmit} className="form-container">
-                        <FormInput
-                            label="Username"
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            icon={"\u{1F464}"}
-                            placeholder="Enter your username"
-                            autoComplete="username"
-                        />
+                        
                         <FormInput
                             label="Email Address"
                             type="email"
@@ -102,6 +98,24 @@ function Signup() {
                             icon={"\u2709\uFE0F"}
                             placeholder="you@company.com"
                             autoComplete="email"
+                        />
+                        <FormInput
+                            label="Firstname"
+                            type="text"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            icon={"\u{1F464}"}
+                            placeholder="Enter your first name"
+                            autoComplete="firstname"
+                        />
+                        <FormInput
+                            label="LastName"
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            icon={"\u{1F464}"}
+                            placeholder="Enter your last name"
+                            autoComplete="lastname"
                         />
                         <FormInput
                             label="Password"
@@ -120,6 +134,15 @@ function Signup() {
                             icon={"\u{1F512}"}
                             placeholder="Confirm your password"
                             autoComplete="new-password"
+                        />
+                        <FormInput
+                            label="phone number"
+                            type="text"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            icon={"\u{1F4DE}"}
+                            placeholder="Enter your phone number"
+                            autoComplete="tel"
                         />
                         {
                             message && <div className={`form-message ${messageType}`}>{message}</div>
