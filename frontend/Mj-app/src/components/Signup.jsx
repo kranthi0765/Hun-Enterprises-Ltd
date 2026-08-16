@@ -22,7 +22,7 @@ function Signup() {
         setLoading(true);
         setMessage("");
         try {
-            const response = await fetch("/api/signup", {
+            const response = await fetch("http://localhost:8080/auth/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -121,6 +121,9 @@ function Signup() {
                             placeholder="Confirm your password"
                             autoComplete="new-password"
                         />
+                        {
+                            message && <div className={`form-message ${messageType}`}>{message}</div>
+                        }
                         <button type="submit" className="btn" disabled={loading}>
                             {loading ? "Creating account..." : "Create Account"}
                         </button>
@@ -136,7 +139,7 @@ function Signup() {
                     </div>
 
                     <p className="auth-switch">
-                        Already have an account? <Link to="/login">Sign in</Link>
+                        Already have an account? <Link to="http://localhost:8080/auth/login">Sign in</Link>
                     </p>
                 </div>
             </div>
