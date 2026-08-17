@@ -10,5 +10,6 @@ public class AuthConstants {
     public static final String ERROR_PASSWORD_REQUIRED = "Password is required";
     public static final String ERROR_PASSWORD_MIN_6_CHARS = "Password must be at least 6 characters long";
     public static final String ERROR_PHONE_NUMBER_REQUIRED = "Phone number is required";
-
-}
+    public static final String ERROR_USER_ALREADY_EXISTED="the email already resisterd with us. please login";
+    public static final String USER_CREATED_SUCCESSFULLY="User created succesfully";
+}  

@@ -1,12 +1,16 @@
 package com.hub_entrprice.ltd.controller;
 
+import com.hub_entrprice.ltd.apiResponse.ApiResponse;
+import com.hub_entrprice.ltd.constants.AuthConstants;
 import com.hub_entrprice.ltd.dto.UserDto;
 import com.hub_entrprice.ltd.entity.User;
 import com.hub_entrprice.ltd.service.UserService;
 
 import jakarta.validation.Valid;
-
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,15 +25,12 @@ public class AuthController {
     public UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@Valid @RequestBody UserDto user) {
-        String result = userService.createUser(user);
-        return ResponseEntity.ok(result);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity<User> loginUser(@Valid @RequestBody UserDto user) {
-        userService.loginUser(user);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ApiResponse<User>> registerUser(@Valid @RequestBody UserDto user) {
+        Map<String,Object> sUser = userService.createUser(user);
+        ApiResponse<User> apiResponse=new ApiResponse<User>(true, AuthConstants.USER_CREATED_SUCCESSFULLY, (User) sUser.get("userData"));
+        HttpHeaders httpHeaders=new HttpHeaders();
+        httpHeaders.add("Authorization", sUser.get("token").toString());
+        return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(apiResponse);
     }
 }
 

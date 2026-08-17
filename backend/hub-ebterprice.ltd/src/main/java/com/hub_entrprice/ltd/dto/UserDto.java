@@ -26,10 +26,5 @@ public class UserDto {
 
     @NotNull(message = AuthConstants.ERROR_PHONE_NUMBER_REQUIRED)
     private String phoneNumber;
-
-    public Object getUsername() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsername'");
-    }
     
 }

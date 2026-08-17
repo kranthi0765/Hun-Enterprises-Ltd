@@ -1,14 +1,11 @@
 package com.hub_entrprice.ltd.Exceptions;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
 import com.hub_entrprice.ltd.apiResponse.ApiResponse;
 import com.hub_entrprice.ltd.constants.GrnericConstant;
 
@@ -27,7 +24,7 @@ public class GlobelExceptionalHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception ex) {
-        ApiResponse<String> response = new ApiResponse<>(false, GrnericConstant.UNABLE_TO_PROCESS_REQUEST_MESSAGE, null);
+        ApiResponse<String> response = new ApiResponse<>(false, GrnericConstant.UNABLE_TO_PROCESS_REQUEST_MESSAGE, ex.getMessage());
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
