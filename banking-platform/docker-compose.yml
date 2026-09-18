@@ -1,0 +1,14 @@
+services:
+  customer-service:
+    build: ./services/customer-service
+    ports: ["8081:8081"]
+  account-service:
+    build: ./services/account-service
+    ports: ["8082:8082"]
+  transaction-service:
+    build: ./services/transaction-service
+    ports: ["8083:8083"]
+  api-gateway:
+    build: ./services/api-gateway
+    ports: ["8080:8080"]
+    depends_on: [customer-service, account-service, transaction-service]
